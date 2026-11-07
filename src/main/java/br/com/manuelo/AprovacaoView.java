@@ -72,7 +72,7 @@ public class AprovacaoView extends HorizontalLayout {
         direita.setHeight("100%");
         direita.setAlignItems(FlexComponent.Alignment.CENTER);
         direita.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
-        direita.getStyle().set("background", "#1a1f44");
+        direita.getStyle().set("background", "#171A34");
 
         add(esquerda, direita);
     }

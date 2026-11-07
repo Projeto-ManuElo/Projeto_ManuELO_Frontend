@@ -34,12 +34,11 @@ public class HomeView extends VerticalLayout {
 
         add(criarTopo(), criarCards(), criarTabela());
 
-        // Ponto de ligação com o backend (por enquanto tudo zerado)
         atualizarResumo(0, 0, 0, 0);
         atualizarMovimentacoes(new ArrayList<>());
     }
 
-    // ---------- Montagem da tela ----------
+   
 
     private Component criarTopo() {
         H2 titulo = new H2("Visão geral");
@@ -56,10 +55,10 @@ public class HomeView extends VerticalLayout {
 
     private Component criarCards() {
         HorizontalLayout cards = new HorizontalLayout(
-                card("Imóveis alugados", imoveisAlugados, "#00a884"),
-                card("Imóveis cadastrados", imoveisCadastrados, "#f59e0b"),
-                card("Contratos próximos dos vencimentos", contratosVencendo, "#4f46e5"),
-                card("Contratos atrasados", contratosAtrasados, "#e11d48"));
+                card("Imóveis alugados", imoveisAlugados, "#00a884", "imoveis?filtro=alugado"),
+                card("Imóveis cadastrados", imoveisCadastrados, "#f59e0b", "imoveis"),
+                card("Contratos próximos dos vencimentos", contratosVencendo, "#4f46e5", "contratos?filtro=vencendo"),
+                card("Contratos atrasados", contratosAtrasados, "#e11d48", "contratos?filtro=atrasados"));
         cards.setWidthFull();
         return cards;
     }
@@ -112,9 +111,9 @@ public class HomeView extends VerticalLayout {
         grid.setItems(lista);
     }
 
-    // ---------- Componentes auxiliares ----------
 
-    private Component card(String rotulo, Span numero, String cor) {
+
+    private Component card(String rotulo, Span numero, String cor, String destino) {
         Span r = new Span(rotulo);
         r.getStyle().set("font-size", "0.8rem").set("color", "#555");
         numero.getStyle().set("font-size", "2rem").set("font-weight", "bold");
@@ -125,7 +124,9 @@ public class HomeView extends VerticalLayout {
                 .set("background", "white")
                 .set("border-radius", "10px")
                 .set("border-left", "4px solid " + cor)
-                .set("flex", "1");
+                .set("flex", "1")
+                .set("cursor", "pointer");
+        c.addClickListener(e -> c.getUI().ifPresent(ui -> ui.navigate(destino)));
         return c;
     }
 

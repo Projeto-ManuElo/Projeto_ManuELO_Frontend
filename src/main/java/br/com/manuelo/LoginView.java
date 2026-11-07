@@ -64,7 +64,7 @@ public class LoginView extends HorizontalLayout {
         direita.setHeight("100%");
         direita.setAlignItems(FlexComponent.Alignment.CENTER);
         direita.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
-        direita.getStyle().set("background", "linear-gradient(180deg,rgb(8, 20, 59),rgb(49, 78, 184))");
+        direita.getStyle().set("background", "#171A34");
 
         add(esquerda, direita);
     }
