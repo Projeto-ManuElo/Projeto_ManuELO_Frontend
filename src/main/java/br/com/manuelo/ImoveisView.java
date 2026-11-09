@@ -16,6 +16,8 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,9 @@ import java.util.List;
 @PageTitle("Imóveis")
 public class ImoveisView extends VerticalLayout implements BeforeEnterObserver {
 
-    record Imovel(String endereco, String tipo, String inquilino, String status) {}
+    record Imovel(String endereco, String tipo, String inquilino, LocalDate inicioContrato, String status) {}
+
+    private static final DateTimeFormatter DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private final Grid<Imovel> grid = new Grid<>();
     private final TextField endereco = new TextField("Endereço");
@@ -39,9 +43,10 @@ public class ImoveisView extends VerticalLayout implements BeforeEnterObserver {
 
         add(criarTopo(), criarFiltros(), criarTabela());
 
-        atualizarImoveis(new ArrayList<>());    }
+        atualizarImoveis(new ArrayList<>());
+    }
 
-    // Lê o ?filtro=... da URL e preenche o campo Status
+   
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         limparFiltros();
@@ -112,6 +117,8 @@ public class ImoveisView extends VerticalLayout implements BeforeEnterObserver {
         grid.addColumn(Imovel::tipo).setHeader("Tipo");
         grid.addColumn(i -> i.inquilino() == null || i.inquilino().isBlank() ? "-" : i.inquilino())
                 .setHeader("Inquilino");
+        grid.addColumn(i -> i.inicioContrato() == null ? "-" : i.inicioContrato().format(DATA))
+                .setHeader("Início do contrato");
         grid.addComponentColumn(i -> badge(i.status())).setHeader("Status");
         grid.setEmptyStateText("Nenhum imóvel cadastrado");
         grid.setHeight("300px");
@@ -139,21 +146,21 @@ public class ImoveisView extends VerticalLayout implements BeforeEnterObserver {
         inquilino.clear();
     }
 
-    //filtrar de verdade quando houver banco
+
     private void aplicarFiltros() {
-        // futuramente: buscar usando endereco, tipo, status e inquilino
+        //(futuramente) buscar usando endereco, tipo, status e inquilino
     }
 
     // Chamado pelo botão Salvar do modal
     private void salvarImovel(ImovelDialog.DadosImovel d) {
         if (dialog.isEditando()) {
-            //atualizar o imóvel existente no banco
+            // futuramente: atualizar o imóvel existente no banco
         } else {
-            //criar um novo imóvel no banco
+            // futuramente: criar um novo imóvel no banco
         }
     }
 
-    // Ponto de ligação com o backend
+    //backend
     public void atualizarImoveis(List<Imovel> lista) {
         grid.setItems(lista);
     }

@@ -22,7 +22,8 @@ public class LoginView extends HorizontalLayout {
         setPadding(false);
         setSpacing(false);
 
-        //Lado esquerdo
+
+
         Image logo = new Image("/images/logo.jpeg", "Brasão");
         logo.setWidth("200px");
         Span nome = new Span("Fundação Manoel Cruz");
@@ -35,7 +36,10 @@ public class LoginView extends HorizontalLayout {
         esquerda.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         esquerda.getStyle().set("background", "#f2f2f2");
 
-        //Lado direito
+        
+
+
+        
         H1 titulo = new H1("Bem vindo!");
         titulo.getStyle().set("color", "white");
 

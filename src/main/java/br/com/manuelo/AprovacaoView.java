@@ -21,7 +21,7 @@ public class AprovacaoView extends HorizontalLayout {
         setPadding(false);
         setSpacing(false);
 
-        // Lado esquerdo
+        
         Image logo = new Image("/images/logo.jpeg", "Brasão");
         logo.setWidth("200px");
         Span nome = new Span("Fundação Manoel Cruz");
@@ -34,7 +34,9 @@ public class AprovacaoView extends HorizontalLayout {
         esquerda.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         esquerda.getStyle().set("background", "#fff9e8");
 
-        // Lado direito
+       
+
+
         H1 titulo = new H1("Bem Vindo à Fundação Manoel Cruz!");
         titulo.getStyle().set("color", "white").set("text-align", "center");
 

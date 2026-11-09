@@ -98,7 +98,7 @@ public class HomeView extends VerticalLayout {
         return caixa;
     }
 
-    // ---------- Métodos para o backend usar depois ----------
+    //Métodos para o backend usar depois
 
     public void atualizarResumo(int alugados, int cadastrados, int vencendo, int atrasados) {
         imoveisAlugados.setText(String.valueOf(alugados));
