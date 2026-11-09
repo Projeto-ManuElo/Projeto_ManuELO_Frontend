@@ -1,5 +1,6 @@
 package br.com.manuelo;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -10,8 +11,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.server.streams.UploadHandler;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class ImovelDialog extends Dialog {
@@ -60,12 +63,16 @@ public class ImovelDialog extends Dialog {
             // futuramente: guardar o arquivo (bytes) junto com o imóvel
         }));
         upload.setAcceptedMimeTypes("application/pdf", "image/png", "image/jpeg");
+        upload.setAcceptedFileExtensions(".pdf", ".png", ".jpg", ".jpeg");
         upload.setMaxFileSize(10 * 1024 * 1024);
         upload.setDropLabel(new Span("Arraste o contrato aqui ou clique para selecionar"));
 
         reformas.getStyle().set("background", "#1a1f44").set("color", "white");
         reformas.addClickListener(e -> {
-            //(DESENVOLVER) abrir a tela de reformas do imóvel
+            String end = endereco.getValue();
+            close();
+            UI.getCurrent().navigate("imoveis/reformas",
+                    QueryParameters.simple(Map.of("endereco", end)));
         });
 
         Button cancelar = new Button("Cancelar", e -> close());
@@ -82,7 +89,7 @@ public class ImovelDialog extends Dialog {
         add(conteudo);
     }
 
-
+    // Abre vazio (adicionar)
     public void abrirNovo() {
         editando = false;
         titulo.setText("Adicionar Imóvel");
@@ -94,7 +101,7 @@ public class ImovelDialog extends Dialog {
         open();
     }
 
-    
+    // Abre preenchido (editar)
     public void abrirEdicao(DadosImovel d) {
         editando = true;
         titulo.setText("Editar Imóvel");

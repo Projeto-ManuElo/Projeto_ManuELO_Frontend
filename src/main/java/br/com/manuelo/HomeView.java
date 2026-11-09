@@ -38,8 +38,6 @@ public class HomeView extends VerticalLayout {
         atualizarMovimentacoes(new ArrayList<>());
     }
 
-   
-
     private Component criarTopo() {
         H2 titulo = new H2("Visão geral");
         Button exportar = new Button("Exportar");
@@ -55,8 +53,8 @@ public class HomeView extends VerticalLayout {
 
     private Component criarCards() {
         HorizontalLayout cards = new HorizontalLayout(
-                card("Imóveis alugados", imoveisAlugados, "#00a884", "imoveis?filtro=alugado"),
-                card("Imóveis cadastrados", imoveisCadastrados, "#f59e0b", "imoveis"),
+                card("Imóveis alugados", imoveisAlugados, "#00a884", "imoveis/filtro/alugado"),
+                card("Imóveis cadastrados", imoveisCadastrados, "#f59e0b", "imoveis/filtro/cadastrados"),
                 card("Contratos próximos dos vencimentos", contratosVencendo, "#4f46e5", "contratos?filtro=vencendo"),
                 card("Contratos atrasados", contratosAtrasados, "#e11d48", "contratos?filtro=atrasados"));
         cards.setWidthFull();
@@ -98,8 +96,7 @@ public class HomeView extends VerticalLayout {
         return caixa;
     }
 
-    //Métodos para o backend usar depois
-
+    // Pontos de ligação com o backend
     public void atualizarResumo(int alugados, int cadastrados, int vencendo, int atrasados) {
         imoveisAlugados.setText(String.valueOf(alugados));
         imoveisCadastrados.setText(String.valueOf(cadastrados));
@@ -110,8 +107,6 @@ public class HomeView extends VerticalLayout {
     public void atualizarMovimentacoes(List<Movimentacao> lista) {
         grid.setItems(lista);
     }
-
-
 
     private Component card(String rotulo, Span numero, String cor, String destino) {
         Span r = new Span(rotulo);

@@ -31,9 +31,12 @@ public class MainLayout extends HorizontalLayout implements RouterLayout, AfterN
         cabecalho.setPadding(false);
         cabecalho.setSpacing(false);
 
+        //Avatar avatar = new Avatar(UsuarioLogado.getNome());
+        //Span nome = new Span(UsuarioLogado.getNome());
         Avatar avatar = new Avatar("Davi Ferreira");
         Span nome = new Span("Davi Ferreira");
         nome.getStyle().set("color", "white").set("font-size", "0.85rem");
+        //Span cargo = new Span(UsuarioLogado.getCargo());
         Span cargo = new Span("Administrador");
         cargo.getStyle().set("color", "#aab").set("font-size", "0.7rem");
         VerticalLayout dados = new VerticalLayout(nome, cargo);
