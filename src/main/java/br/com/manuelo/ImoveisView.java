@@ -65,15 +65,11 @@ public class ImoveisView extends VerticalLayout implements BeforeEnterObserver {
 
     private Component criarTopo() {
         H2 titulo = new H2("Imóveis");
-
-        // Button registros = new Button("Movimentação de registros",
-        //         e -> getUI().ifPresent(ui -> ui.navigate("imoveis/registros")));
-
         Button exportar = new Button("Exportar");
         Button novo = new Button("+ Novo Imóvel", e -> dialog.abrirNovo());
         novo.getStyle().set("background", "#5b5bf0").set("color", "white");
 
-        HorizontalLayout topo = new HorizontalLayout(titulo, new HorizontalLayout(registros, exportar, novo));
+        HorizontalLayout topo = new HorizontalLayout(titulo, new HorizontalLayout(exportar, novo));
         topo.setWidthFull();
         topo.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
         topo.setAlignItems(FlexComponent.Alignment.CENTER);

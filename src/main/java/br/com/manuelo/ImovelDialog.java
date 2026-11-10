@@ -67,11 +67,12 @@ public class ImovelDialog extends Dialog {
         upload.setMaxFileSize(10 * 1024 * 1024);
         upload.setDropLabel(new Span("Arraste o contrato aqui ou clique para selecionar"));
 
+        // Reformas -> Movimentação de registros
         reformas.getStyle().set("background", "#1a1f44").set("color", "white");
         reformas.addClickListener(e -> {
             String end = endereco.getValue();
             close();
-            UI.getCurrent().navigate("imoveis/reformas",
+            UI.getCurrent().navigate("imoveis/registros",
                     QueryParameters.simple(Map.of("endereco", end)));
         });
 
