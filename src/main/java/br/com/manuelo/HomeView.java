@@ -55,8 +55,8 @@ public class HomeView extends VerticalLayout {
         HorizontalLayout cards = new HorizontalLayout(
                 card("Imóveis alugados", imoveisAlugados, "#00a884", "imoveis/filtro/alugado"),
                 card("Imóveis cadastrados", imoveisCadastrados, "#f59e0b", "imoveis/filtro/cadastrados"),
-                card("Contratos próximos dos vencimentos", contratosVencendo, "#4f46e5", "contratos?filtro=vencendo"),
-                card("Contratos atrasados", contratosAtrasados, "#e11d48", "contratos?filtro=atrasados"));
+                card("Contratos próximos dos vencimentos", contratosVencendo, "#4f46e5", "home/filtro/vencendo"),
+                card("Contratos atrasados", contratosAtrasados, "#e11d48", "home/filtro/atrasados"));
         cards.setWidthFull();
         return cards;
     }

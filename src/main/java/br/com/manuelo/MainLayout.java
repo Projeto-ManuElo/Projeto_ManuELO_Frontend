@@ -12,6 +12,7 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.RouterLayout;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainLayout extends HorizontalLayout implements RouterLayout, AfterNavigationObserver {
@@ -31,13 +32,10 @@ public class MainLayout extends HorizontalLayout implements RouterLayout, AfterN
         cabecalho.setPadding(false);
         cabecalho.setSpacing(false);
 
-        //Avatar avatar = new Avatar(UsuarioLogado.getNome());
-        //Span nome = new Span(UsuarioLogado.getNome());
-        Avatar avatar = new Avatar("Davi Ferreira");
-        Span nome = new Span("Davi Ferreira");
+        Avatar avatar = new Avatar(UsuarioLogado.getNome());
+        Span nome = new Span(UsuarioLogado.getNome());
         nome.getStyle().set("color", "white").set("font-size", "0.85rem");
-        //Span cargo = new Span(UsuarioLogado.getCargo());
-        Span cargo = new Span("Administrador");
+        Span cargo = new Span(UsuarioLogado.getCargo());
         cargo.getStyle().set("color", "#aab").set("font-size", "0.7rem");
         VerticalLayout dados = new VerticalLayout(nome, cargo);
         dados.setPadding(false);
@@ -88,7 +86,14 @@ public class MainLayout extends HorizontalLayout implements RouterLayout, AfterN
 
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
-        String atual = event.getLocation().getFirstSegment();
+        List<String> partes = event.getLocation().getSegments();
+        String base = event.getLocation().getFirstSegment();
+        // Cards de contratos da Home destacam "Contratos" no menu
+        if (partes.size() >= 3 && partes.get(0).equals("home") && partes.get(1).equals("filtro")
+                && (partes.get(2).equals("vencendo") || partes.get(2).equals("atrasados"))) {
+            base = "contratos";
+        }
+        final String atual = base;
         links.forEach((rota, a) ->
                 a.getStyle().set("background", rota.equals(atual) ? "#5b5bf0" : "transparent"));
     }
