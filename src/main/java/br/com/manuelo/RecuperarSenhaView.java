@@ -21,7 +21,7 @@ public class RecuperarSenhaView extends HorizontalLayout {
         setSpacing(false);
 
         
-        Image logo = new Image("/images/logo.jpeg", "Brasão");
+        Image logo = new Image("/images/logo.png", "Brasão");
         logo.setWidth("200px");
         Span nome = new Span("Fundação Manoel Cruz");
         nome.getStyle().set("font-size", "2rem").set("font-family", "serif");

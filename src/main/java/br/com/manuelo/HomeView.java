@@ -75,6 +75,7 @@ public class HomeView extends VerticalLayout {
         }).setHeader("Valor");
         grid.setEmptyStateText("Nenhuma movimentação registrada");
         grid.setHeight("300px");
+        
 
         H2 titulo = new H2("Movimentação recentes");
         titulo.getStyle().set("font-size", "1rem").set("margin", "0");

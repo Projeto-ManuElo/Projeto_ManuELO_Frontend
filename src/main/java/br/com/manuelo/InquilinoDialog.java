@@ -2,6 +2,7 @@ package br.com.manuelo;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasSize;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.H3;
@@ -13,8 +14,10 @@ import com.vaadin.flow.component.textfield.BigDecimalField;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.server.streams.UploadHandler;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class InquilinoDialog extends Dialog {
@@ -30,6 +33,7 @@ public class InquilinoDialog extends Dialog {
     private final EmailField emailFiador = new EmailField("Email do fiador");
     private final TextField enderecoVinculado = new TextField("Endereço Vinculado");
     private final BigDecimalField valorCaucao = new BigDecimalField("Valor do calção");
+    private final Button historico = new Button("Histórico");
     private final Consumer<DadosInquilino> aoSalvar;
     private boolean editando = false;
 
@@ -59,10 +63,19 @@ public class InquilinoDialog extends Dialog {
         Upload contrato = criarUpload("Arraste o contrato aqui ou clique para selecionar");
         Upload recibo = criarUpload("Arraste o contrato aqui ou clique para selecionar");
 
+        // Histórico -> Movimentação de registros do inquilino
+        historico.getStyle().set("background", "#5b5bf0").set("color", "white");
+        historico.addClickListener(e -> {
+            String n = nome.getValue();
+            close();
+            UI.getCurrent().navigate("inquilinos/historico",
+                    QueryParameters.simple(Map.of("nome", n)));
+        });
+
         Button cancelar = new Button("Cancelar", e -> close());
         Button salvar = new Button("Salvar", e -> salvar());
         salvar.getStyle().set("background", "#5b5bf0").set("color", "white");
-        HorizontalLayout botoes = new HorizontalLayout(cancelar, salvar);
+        HorizontalLayout botoes = new HorizontalLayout(cancelar, historico, salvar);
         botoes.setWidthFull();
         botoes.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
@@ -107,6 +120,7 @@ public class InquilinoDialog extends Dialog {
         editando = false;
         titulo.setText("Adicionar Inquilino");
         limpar();
+        historico.setVisible(false);
         open();
     }
 
@@ -117,6 +131,7 @@ public class InquilinoDialog extends Dialog {
         nome.setValue(d.nome() == null ? "" : d.nome());
         cpf.setValue(d.cpf() == null ? "" : d.cpf());
         email.setValue(d.email() == null ? "" : d.email());
+        historico.setVisible(true);
         open();
     }
 

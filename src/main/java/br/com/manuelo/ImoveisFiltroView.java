@@ -88,9 +88,8 @@ public class ImoveisFiltroView extends VerticalLayout implements BeforeEnterObse
         detalhe.getStyle().set("font-size", "0.75rem").set("color", "#00a884").set("font-weight", "bold");
 
         VerticalLayout card = new VerticalLayout(rotuloCard, numero, detalhe);
-        card.setSpacing(false);
         card.setWidthFull();
-        card.getStyle().set("background", "white").set("border-radius", "10px");
+card.getStyle().set("background", "white").set("border-radius", "10px").setGap("var(--vaadin-gap-m)");
         return card;
     }
 

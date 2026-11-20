@@ -41,6 +41,7 @@ public class FinanceiroView extends VerticalLayout implements BeforeEnterObserve
     private final ExtratoGrid extrato = new ExtratoGrid();
     private final PesquisaLancamentoDialog pesquisa = new PesquisaLancamentoDialog();
     private final ConfirmarLancamentoDialog confirmacao = new ConfirmarLancamentoDialog(this::registrarLancamento);
+    private final ConfirmarExportacaoDialog exportacao = new ConfirmarExportacaoDialog(this::exportarExtrato);
 
     private boolean entrada = true;
     private boolean atualizandoAba = false;
@@ -69,7 +70,7 @@ public class FinanceiroView extends VerticalLayout implements BeforeEnterObserve
 
     private Component criarTopo() {
         H2 titulo = new H2("Movimentação Financeira");
-        Button exportar = new Button("Exportar extrato");
+        Button exportar = new Button("Exportar extrato", e -> exportacao.open());
         Button pesquisar = new Button("Pesquisar Lançamentos", e -> pesquisa.open());
         pesquisar.getStyle().set("background", "#5b5bf0").set("color", "white");
 
@@ -178,6 +179,11 @@ public class FinanceiroView extends VerticalLayout implements BeforeEnterObserve
     private void registrarLancamento() {
         // futuramente: salvar o lançamento (entrada ou saída) no banco
         limparFormulario();
+    }
+
+    // Ponto de ligação com o backend: chamado após confirmar a exportação
+    private void exportarExtrato() {
+        // futuramente: gerar o PDF do extrato do período
     }
 
     public void atualizarExtrato(List<ExtratoGrid.Lancamento> lista) {

@@ -41,7 +41,7 @@ public class ContratoNovoView extends VerticalLayout {
     private Component criarTopo() {
         H2 titulo = new H2("Contratos");
         Button pagar = new Button("Pagar o aluguel",
-                e -> getUI().ifPresent(ui -> ui.navigate("financeiro/entrada")));
+                e -> getUI().ifPresent(ui -> ui.navigate("contratos/pagar")));
         pagar.getStyle().set("background", "#5b5bf0").set("color", "white");
 
         HorizontalLayout topo = new HorizontalLayout(titulo, pagar);
